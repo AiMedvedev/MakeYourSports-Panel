@@ -1,0 +1,64 @@
+body
+		{
+			background-color:#AEE19E;
+			background-image:url("https://www.studiopress.com/wp-content/uploads/sp-bg-2880x1452.png");
+		}
+		.form-container
+		{
+			margin-top:40px;
+			margin-bottom: 40px;
+		}
+		#dob
+		{
+			color:orange;
+		}
+		label
+		{
+			color:white;
+			font-size:17px;
+			font-style:italic;
+		}
+
+        .main__wrapper {
+            display: flex;
+            justify-content: space-around;
+        }
+
+		.form-control
+		{
+			background-color:#1c7bd0;
+			color:white;
+		}
+		.form-control::placeholder
+		{
+			color:orange;
+		}
+
+		.form-control:focus
+		{
+			background-color:#1c7bd0;
+			color:white;
+		}
+		h1
+		{
+			margin-bottom:40px;
+			font-style:italic;
+			color:white;
+		}
+
+		button
+		{
+			margin-top:30px;
+		}
+		.btn
+		{
+			background-color: orange;
+			color:white;
+		}
+
+		
+		table th,td
+		{
+			color:white;
+			text-align:center;
+		}

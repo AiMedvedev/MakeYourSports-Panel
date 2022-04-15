@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classes Table</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="main__wrapper">
+        <div class="container form-container">
+            <h1 class="text-center">Form With Table</h1>
+            <div class="row">
+                <div class="col form-group">
+                    <div class="row">
+                        <label class="col-md-3">First Name </label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="fname" placeholder="Enter First Name">
+                            <small id="fname_alert"></small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col form-group">
+                    <div class="row">
+                        <label class="col-md-3">Last Name </label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="lname" placeholder="Enter Last Name">
+                            <small id="lname_alert"></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col form-group">
+                    <div class="row">
+                        <label class="col-md-3">Enter Your Age </label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="age" placeholder="Enter Age">
+                            <small id="age_alert"></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col form-group">
+                    <div class="row">
+                        <label class="col-md-3">Gender</label>
+                        <div class="col-md-9">
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" id="Male" name="gender" value="Male">
+                                <label class="form-check-label" for="male">Male</label>
+                            </div>
+
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" id="Female" name="gender" value="Female">
+                                <label class="form-check-label" for="female">Female</label>
+                            </div><br>
+                            <small id="gender_alert"></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col form-group">
+                    <div class="row">
+                        <label class="col-md-3">Address </label>
+                        <div class="col-md-9">
+                            <textarea class="form-control" placeholder="Enter Your Address" id="address"></textarea>
+                            <small id="address_alert"></small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col form-group">
+
+                    <div class="row">
+                        <label class="col-md-3">Phone Number</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="pno" placeholder="Enter Your PhoneNumber">
+                            <small id="pno_alert"></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col form-group">
+                    <div class="row">
+                        <label class="col-md-3">Date Of Birth</label>
+                        <div class="col-md-9">
+                            <input type="date" class="form-control" id="dob">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col form-group">
+                    <div class="row">
+                        <label class="col-md-3">Qualification</label>
+                        <div class="col-md-9">
+                            <input list="Qua" class="form-control" placeholder="Enter Your Qualification"
+                                id="Qualification">
+                            <datalist id="Qua">
+                                <option value="Bsc Computer Science">
+                                <option value="BCA">
+                                <option value="B.com">
+                                <option value="BBA">
+                                <option value="BE">
+                                <option value="Bsc Maths">
+                            </datalist>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col form-group">
+                    <div class="row">
+                        <label class="col-md-3">E-mail</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="email" placeholder="Enter Your E-mail">
+                            <small id="email_alert"></small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col form-group">
+                    <div class="row">
+                        <label class="col-md-3">Company Name</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="cname" placeholder="Enter Your Company">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" onclick="GetData();" class="btn btn-default mx-auto d-block">Submit</button>
+        </div>
+
+        <!-- End Of the Form -->
+
+        <!-- Start Table Here -->
+        <div class="container table-container">
+            <h1 class="text-center">Form Values in Table</h1>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="text-center">First name</th>
+                        <th class="text-center">Last name</th>
+                        <th class="text-center">Age</th>
+                        <th class="text-center">Gender</th>
+                        <th class="text-center">Address</th>
+                        <th class="text-center">Phone Number</th>
+                        <th class="text-center">Date of Birth</th>
+                        <th class="text-center">Qualification</th>
+                        <th class="text-center">E-mail</th>
+                        <th class="text-center">Company Name</th>
+                    </tr>
+                </thead>
+            </table>
+    
+            <!-- End Of the Table -->
+        </div>
+        
+    </div>
+
+</body>
+
+</html>
