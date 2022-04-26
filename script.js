@@ -1,28 +1,26 @@
 'use strict';
 
 class TeamSports {
-    constructor(activity, field, squad) {
+    constructor(activity, arena, rules, playTime) {
         this.activity = activity;
-        this.field = field;
-        this.squad = squad;
+        this.arena = arena;
+        this.rules = rules;
+        this.playTime = playTime;
     }
     gamePlay() {
         console.log('This is so fun!');
     }
-}
-
-class Soccer extends TeamSports {
-    constructor(activity, field, squad, ballType, skills = []) {
-        super(activity, field, squad);
-        this.ballType = ballType;
-        this._skills = skills;
+    
+    delete() {
+        console.log('delete');
     }
 }
 
-class Football extends TeamSports {
-    constructor(activity, field, squad, ballType, skills = []) {
-        super(activity, field, squad);
-        this.ballType = ballType;
+class Hockey extends TeamSports {
+    constructor(activity, arena, rules, playTime, team, playingItem, skills = []) {
+        super(activity, arena, rules, playTime);
+        this.team = team;
+        this.playingItem = playingItem;
         this._skills = skills;
     }
 
@@ -33,41 +31,123 @@ class Football extends TeamSports {
     set skills(str) {
         this.skills.push(str);
     }
+}
 
-    rules() {
-        console.log('Easy and clear!');
+class Football extends TeamSports {
+    constructor(activity, arena, rules, playTime, team, playingItem, skills = []) {
+        super(activity, arena, rules, playTime);
+        this.team = team;
+        this.playingItem = playingItem;
+        this._skills = skills;
+    }
+
+    get skills() {
+        return this._skills;
+    }
+
+    set skills(str) {
+        this._skills.push(str);
     }
 }
 
-const flagFootball = new Football('intensive', 'medium', 5, 'oval', ['speed', 'catch', 'agility']);
+const chooseSportType = function () {
+    let football = document.getElementById("Football");
+    let hockey = document.getElementById("Hockey");
+    let sportType;
 
-flagFootball.skills = 'jumping';
+    if (football.checked == false && hockey.checked == false) {
+        document.getElementById("sport_alert").innerHTML = "Please Select Sport Type";
+        document.getElementById("sport_alert").style.color = "red"; 
+    }
 
-console.log(flagFootball);
+    if (football.checked) {
+        sportType = football.value;
+        return sportType;
+    } else {
+        sportType = hockey.value;
+        return sportType;
+    }
+}
 
 
-function GetData() {
-    let fname = document.getElementById("fname").value;
-    let lname = document.getElementById("lname").value;
-    let age = document.getElementById("age").value;
-    let gender = Gender();
-    let address = document.getElementById("address").value;
-    let pno = document.getElementById("pno").value;
-    let dob = document.getElementById("dob").value;
-    let Qualification = document.getElementById("Qualification").value;
-    let email = document.getElementById("email").value;
-    let cname = document.getElementById("cname").value;
-    let fnamePatt = /^[A-Za-z]+$/g;
-    let lnamePatt = /^[A-Za-z]+$/g;
-    let agePatt = /^[0-9]+$/g;
-    let pnoPatt = /^[0-9]+$/g;
-    let emailAt = "@";
-    let emailAtsrh = email.search(emailAt);
+function makeNewSport() {
+    let sportType = chooseSportType();
+    let sportName = document.getElementById("sport-name").value;
+    let activity = document.getElementById("activity").value;
+    let arena = document.getElementById("arena").value;
+    let rules = document.getElementById("rules").value;
+    let playingTime = document.getElementById("playing-time").value;
+    let skills = document.getElementById("skills").value;
+    let team = document.getElementById("team").value;
+    let playingItem = document.getElementById("playing-item").value;
+    
+    let sportNamePatt = /^[A-Za-z]+$/g;
+    let activityPatt = /^[A-Za-z]+$/g;
+    let arenaPatt = /^[A-Za-z]+$/g;
+
 
     let table = document.getElementsByTagName('table')[0];
 
-
     let newRow = table.insertRow(table.rows.length);
+
+    //sportName Validation
+
+    if (sportNamePatt.test(sportName) == false) {
+        document.getElementById("sport-name_alert").innerHTML = "Numbers Here";
+        document.getElementById("sport-name_alert").style.color = "red";
+    }
+
+    if (sportName.length == 0) {
+        document.getElementById("sport-name_alert").innerHTML = "Sports Name Should Not be Blank";
+        document.getElementById("sport-namee_alert").style.color = "red";
+    }
+
+    //activity Validation
+
+    if (activityPatt.test(activity) == false) {
+        document.getElementById("activity_alert").innerHTML = "Numbers Here";
+        document.getElementById("activity_alert").style.color = "red";
+    }
+
+    if (activity.length == 0) {
+        document.getElementById("lname_alert").innerHTML = "Activity Should Not be Blank";
+        document.getElementById("lname_alert").style.color = "red";
+    }
+
+    // arena Validation
+
+    if (arenaPatt.test(arena) == false) {
+        document.getElementById("arena_alert").innerHTML = "Numbers Here";
+        document.getElementById("arena_alert").style.color = "red";
+    }
+
+    if (arena.length == 0) {
+        document.getElementById("arena_alert").innerHTML = "Arena Should Not be Blank";
+        document.getElementById("arena_alert").style.color = "red";
+    }
+
+    //rules Validation
+
+    if (rules.length == 0) {
+        document.getElementById("rules_alert").innerHTML = "Rules Should Not be Blank";
+        document.getElementById("rules_alert").style.color = "red";
+    }
+
+    // playingTime Validation
+
+    if (playingTime.length == 0) {
+        document.getElementById("playing-time_alert").innerHTML = "Rules Should Not be Blank";;
+        document.getElementById("playing-time_alert").style.color = "red";
+    }
+    
+    
+
+    
+
+    //let sport = sportName.value;
+    //sportName = new SportType (activity, arena, rules, playingTime, team, playingItem, skills);
+    
+
 
     let cel1 = newRow.insertCell(0);
     let cel2 = newRow.insertCell(1);
@@ -78,98 +158,32 @@ function GetData() {
     let cel7 = newRow.insertCell(6);
     let cel8 = newRow.insertCell(7);
     let cel9 = newRow.insertCell(8);
-    let cel10 = newRow.insertCell(9);
+   
 
-    cel1.innerHTML = fname;
-    cel2.innerHTML = lname;
-    cel3.innerHTML = age;
-    cel4.innerHTML = gender;
-    cel5.innerHTML = address;
-    cel6.innerHTML = pno;
-    cel7.innerHTML = dob;
-    cel8.innerHTML = Qualification;
-    cel9.innerHTML = email;
-    cel10.innerHTML = cname;
-
-
-    //First name Validation
-
-    if (fnamePatt.test(fname) == false) {
-        document.getElementById("fname_alert").innerHTML = "Numbers Here";
-        document.getElementById("fname_alert").style.color = "red";
-
-    }
-
-    if (fname.length == 0) {
-        document.getElementById("fname_alert").innerHTML = "First Name Should be Blank";
-        document.getElementById("fname_alert").style.color = "red";
-    }
-
-    //Last name Validation
-
-    if (lnamePatt.test(lname) == false) {
-        document.getElementById("lname_alert").innerHTML = "Numbers Here";
-        document.getElementById("lname_alert").style.color = "red";
-    }
-
-    if (lname.length == 0) {
-        document.getElementById("lname_alert").innerHTML = "Last Name Should be Blank";
-        document.getElementById("lname_alert").style.color = "red";
-    }
-
-    // Age Validation
-
-    if (agePatt.test(age) == false) {
-        document.getElementById("age_alert").innerHTML = "Your Input is Wrong";
-        document.getElementById("age_alert").style.color = "red";
-    }
-
-    if (age.length == 0) {
-        document.getElementById("age_alert").innerHTML = "Age blank";
-        document.getElementById("age_alert").style.color = "red";
-    }
-
-    //Address Validation
-
-    if (address.length == 0) {
-        document.getElementById("address_alert").innerHTML = "Address Should be Blank";
-        document.getElementById("address_alert").style.color = "red";
-    }
-
-    // Pnone Number Validation
-
-    if (pnoPatt.test(pno) == false) {
-        document.getElementById("pno_alert").innerHTML = "Numbers only Allowed";
-        document.getElementById("pno_alert").style.color = "red";
-    }
-    //E-mail Validation
-
-    if (emailAtsrh < 0) {
-        document.getElementById("email_alert").innerHTML = "Enter E-mail Correctly";
-        document.getElementById("email_alert").style.color = "red";
-    }
-
-    if (fname.length == 0 || lname.length == 0 || age.length == 0 || address.length == 0 || pno.length == 0 || dob.length == 0 || email.length == 0 || cname.length == 0) {
-
-        table.disabled = "true";
-    }
-
+    cel1.innerHTML = sportType;
+    cel2.innerHTML = sportName;
+    cel3.innerHTML = activity;
+    cel4.innerHTML = arena;
+    cel5.innerHTML = rules;
+    cel6.innerHTML = playingTime;
+    cel7.innerHTML = team;
+    cel8.innerHTML = playingItem;
+    cel9.innerHTML = skills;
 }
 
 
-function Gender() {
-    let m = document.getElementById("Male").checked;
-    let f = document.getElementById("Female").checked;
-    let man = " ";
+/* function selectSportType() {
+    let football = document.getElementById("Football").checked;
+    let hockey = document.getElementById("Hockey").checked;
 
-    if (m == false && f == false) {
-        document.getElementById("gender_alert").innerHTML = "Please Select Gender";
-        document.getElementById("gender_alert").style.color = "red";
+    if (football == false && hockey == false) {
+        document.getElementById("sport_alert").innerHTML = "Please Select Sport Type";
+        document.getElementById("sport_alert").style.color = "red";
 
-    } else if (m == true) {
-        man = man.innerHTML = "Male";
+    } else if (football == true) {
+        sport = sport.innerHTML = "Football";
     } else {
-        man = man.innerHTML = "Female";
+        sport = sport.innerHTML = "Hockey";
     }
-    return man;
-}
+    return sport;
+} */

@@ -61,4 +61,28 @@ body
 		{
 			color:white;
 			text-align:center;
+			border: solid 1px purple;
+		}
+
+		th,td {
+			padding: 5px;
+			max-width: 120px;
+			max-height: 100%;
+			overflow: auto;
+		}
+
+		table {
+			border: solid 1px purple;
+			border-collapse: collapse;
+		}
+		
+		.table-container {
+			display: flex;
+			flex-direction: column;
+			justify-items: center;
+			align-items: center;
+		}
+
+		.table-container .text-center {
+			margin-top: 60px;
 		}
