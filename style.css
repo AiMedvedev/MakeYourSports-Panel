@@ -3,15 +3,18 @@ body
 			background-color:#AEE19E;
 			background-image:url("https://www.studiopress.com/wp-content/uploads/sp-bg-2880x1452.png");
 		}
+
 		.form-container
 		{
 			margin-top:40px;
 			margin-bottom: 40px;
 		}
+
 		#dob
 		{
 			color:orange;
 		}
+
 		label
 		{
 			color:white;
@@ -19,17 +22,25 @@ body
 			font-style:italic;
 		}
 
+		select {
+			color: orange;
+		}
+
         .main__wrapper {
             display: flex;
             justify-content: space-around;
         }
 
-		.form-control
+		.form-control,
+		.form-check-input
 		{
 			background-color:#1c7bd0;
 			color:white;
+			margin-bottom: 4px;
 		}
-		.form-control::placeholder
+
+		.form-control::placeholder,
+		.form-check-input
 		{
 			color:orange;
 		}
@@ -39,6 +50,7 @@ body
 			background-color:#1c7bd0;
 			color:white;
 		}
+
 		h1
 		{
 			margin-bottom:40px;
@@ -50,13 +62,13 @@ body
 		{
 			margin-top:30px;
 		}
+
 		.btn
 		{
 			background-color: orange;
 			color:white;
 		}
 
-		
 		table th,td
 		{
 			color:white;
@@ -66,7 +78,7 @@ body
 
 		th,td {
 			padding: 5px;
-			max-width: 120px;
+			max-width: 150px;
 			max-height: 100%;
 			overflow: auto;
 		}

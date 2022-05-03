@@ -18,15 +18,10 @@
                 <div class="row">
                     <label class="col-md-3">Sport Type</label>
                     <div class="col-md-9">
-                        <div class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input" id="Football" name="sport" value="Football">
-                            <label class="form-check-label" for="football">Football</label>
-                        </div>
-
-                        <div class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input" id="Hockey" name="sport" value="Hockey">
-                            <label class="form-check-label" for="hockey">Hockey</label>
-                        </div><br>
+                        <select name="select" id="select" class="select form-control" placeholder="Choose Sport type">
+                            <option class="form-check-input" value="Football" id="Football" name="sport">Football</option>
+                            <option class="form-check-input" value="Hockey" id="Hockey" name="sport">Hockey</option>
+                        </select>
                         <small id="sport_alert"></small>
                     </div>
                 </div>
@@ -114,23 +109,22 @@
                     <div class="row">
                         <label class="col-md-3">Skills</label>
                         <div class="col-md-9">
-                            <input list="Qua" class="form-control" placeholder="Enter Players' Skills"
-                                id="skills" multiple>
-                            <datalist id="Qua">
-                                <option value="Speed">
-                                <option value="Agility">
-                                <option value="Body Control">
-                                <option value="Jumping">
-                                <option value="Concentration">
-                                <option value="Catching">
-                                <option value="Elusiveness">
+                            <select name="skills" id="skills" class="select form-control" placeholder="Enter Players' Skills">
+                            <datalist id="skill">
+                                <option value="Speed" class="form-check-input">Speed</option>
+                                <option value="Agility" class="form-check-input">Agility</option>
+                                <option value="Body Control" class="form-check-input">Body Control</option>
+                                <option value="Jumping" class="form-check-input">Jumping</option>
+                                <option value="Concentration" class="form-check-input">Concentration</option>
+                                <option value="Catching" class="form-check-input">Catching</option>
+                                <option value="Elusiveness" class="form-check-input">Elusiveness</option>
                             </datalist>
-
+                            </select>
                         </div>
                     </div>
                 </div>
             </div>
-            <button type="submit" onclick="makeNewSport();" class="btn btn-default mx-auto d-block">Save Sport</button>
+            <button type="submit" class="btn btn-default mx-auto d-block">Save Sport</button>
         </div>
 
         <!-- End Of the Form -->
@@ -138,7 +132,7 @@
         <!-- Start Table Here -->
         <div class="container table-container">
             <h1 class="text-center">Table of Sports</h1>
-
+            
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -147,7 +141,7 @@
                         <th class="text-center">Activity Type</th>
                         <th class="text-center">Arena</th>
                         <th class="text-center">Rules</th>
-                        <th class="text-center">Playing Time Format</th>
+                        <th class="text-center">Playing Time</th>
                         <th class="text-center">Team Format</th>
                         <th class="text-center">Playing Item</th>
                         <th class="text-center">Skills</th>
