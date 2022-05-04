@@ -2,7 +2,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const submitBtn = document.querySelector('.form-container .btn-default')
     const sportsArray = JSON.parse(localStorage.getItem("sports")) || [];
-    let newObj;
+    let deleteBtns;
 
     class TeamSports {
         constructor(sportName, activity, arena, rules, playTime) {
@@ -81,7 +81,10 @@ document.addEventListener("DOMContentLoaded", () => {
         cel7.innerHTML = obj.team;
         cel8.innerHTML = obj.playingItem;
         cel9.innerHTML = obj._skills;
-        cel10.innerHTML = `<img src="delete.svg" class="delete" alt="basket">`;
+        cel10.innerHTML = `<img src="delete.svg" class="delete" id="${table.rows.length - 1}" alt="basket">`;
+        
+        deleteRow();
+        localStorage.setItem('sports', JSON.stringify(sportsArray));
     }
 
     const makeNewSport = () => {
@@ -106,11 +109,10 @@ document.addEventListener("DOMContentLoaded", () => {
             sport = new Hockey(sportName, activity, arena, rules, playingTime, team, playingItem, skills, sportClass);
         }
 
-        let sportNamePatt = /^[A-Za-z-]+$/g;
-        let activityPatt = /^[A-Za-z]+$/g;
-        let arenaPatt = /^[A-Za-z]+$/g;
 
-        //sportName Validation
+        let sportNamePatt = /^[A-Za-z- ]+$/g;
+        let activityPatt = /^[A-Za-z -]+$/g;
+        let arenaPatt = /^[A-Za-z -\/()]+$/g;
 
         if (sportNamePatt.test(sportName) == false) {
             document.getElementById("sport-name_alert").innerHTML = "Numbers Here";
@@ -122,8 +124,6 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("sport-namee_alert").style.color = "red";
         }
 
-        //activity Validation
-
         if (activityPatt.test(activity) == false) {
             document.getElementById("activity_alert").innerHTML = "Numbers Here";
             document.getElementById("activity_alert").style.color = "red";
@@ -133,8 +133,6 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("lname_alert").innerHTML = "Activity Should Not be Blank";
             document.getElementById("lname_alert").style.color = "red";
         }
-
-        // arena Validation
 
         if (arenaPatt.test(arena) == false) {
             document.getElementById("arena_alert").innerHTML = "Numbers Here";
@@ -146,53 +144,55 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("arena_alert").style.color = "red";
         }
 
-        //rules Validation
-
         if (rules.length == 0) {
             document.getElementById("rules_alert").innerHTML = "Rules Should Not be Blank";
             document.getElementById("rules_alert").style.color = "red";
         }
 
-        // playingTime Validation
-
         if (playingTime.length == 0) {
             document.getElementById("playing-time_alert").innerHTML = "Rules Should Not be Blank";
             document.getElementById("playing-time_alert").style.color = "red";
         }
-        
+
         sportsArray.push(sport);
-
-        localStorage.setItem('sports', JSON.stringify(sportsArray));
-
         addNewRow(sport);
     }
 
     const deleteRow = () => {
-        let deleteBtns = document.querySelectorAll('.delete');
-            
-            deleteBtns.forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.target.closest('tr').remove();
-                })
+         
+        deleteBtns = document.querySelectorAll('.delete');
+        deleteBtns.forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+                e.target.closest('tr').remove();
+                sportsArray.splice((+e.target.id - 1), 1)
+                localStorage.setItem('sports', JSON.stringify(sportsArray));
             })
+        })
+    }
+
+    const clearInputs = () => {
+        const inputs = document.querySelectorAll('input');
+        const area = document.querySelector('textarea');
+        inputs.forEach(input => {
+            input.value = '';
+        })
+        area.value = '';
     }
 
     submitBtn.addEventListener('click', (e) => {
         e.preventDefault();
         makeNewSport();
+        clearInputs();
     });
 
     const render = function () { 
+        const rows = document.querySelectorAll('tr');
+        
         sportsArray.forEach(item => {
             addNewRow(item);
-            //console.log(item.sportClass)
-            //let newObj = new `${item.sportClass}`(item.sportName, item.activity, item.arena, item.rules, item.playingTime, item.team, item.playingItem, item.skills, item.sportClass)
-            
-            //return newObj
         });
     };
 
     render();
     deleteRow();
-
 })

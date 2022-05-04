@@ -22,10 +22,6 @@ body
 			font-style:italic;
 		}
 
-		select {
-			color: orange;
-		}
-
         .main__wrapper {
             display: flex;
             justify-content: space-around;
