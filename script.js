@@ -1,29 +1,44 @@
 'use strict';
+
 document.addEventListener("DOMContentLoaded", () => {
     const submitBtn = document.querySelector('.form-container .btn-default')
-    const sportsArray = JSON.parse(localStorage.getItem("sports")) || [];
-    let deleteBtns;
+    let sportsArray = JSON.parse(localStorage.getItem("sports")) || [];
 
     class TeamSports {
-        constructor(sportName, activity, arena, rules, playTime) {
+        constructor(sportName, activity, arena, rules, playTime, id) {
             this.sportName = sportName;
             this.activity = activity;
             this.arena = arena;
             this.rules = rules;
             this.playTime = playTime;
+            this.id = id;
         }
         gamePlay() {
             console.log('This is so fun!');
         }
 
         delete() {
-            
+            const tbody = document.getElementById('table-body');
+    
+            tbody.addEventListener('click', (e) => {
+                
+                if (e.target.closest('.delete')) {
+                    const tr = e.target.closest('tr');
+                    const id = tr.dataset.key;
+                    
+                    e.target.closest('tr').remove();
+                    sportsArray.splice((id), 1)
+                    localStorage.setItem('sports', JSON.stringify(sportsArray));
+                }
+            });
+
+            render();
         }
     }
 
     class Hockey extends TeamSports {
-        constructor(sportName, activity, arena, rules, playTime, team, playingItem, skills = [], sportClass) {
-            super(sportName, activity, arena, rules, playTime);
+        constructor(sportName, activity, arena, rules, playTime, id, team, playingItem, skills = [], sportClass) {
+            super(sportName, activity, arena, rules, playTime, id);
             this.team = team;
             this.playingItem = playingItem;
             this._skills = skills;
@@ -40,8 +55,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     class Football extends TeamSports {
-        constructor(sportName, activity, arena, rules, playTime, team, playingItem, skills = [], sportClass) {
-            super(sportName, activity, arena, rules, playTime);
+        constructor(sportName, activity, arena, rules, playTime, id, team, playingItem, skills = [], sportClass) {
+            super(sportName, activity, arena, rules, playTime, id);
             this.team = team;
             this.playingItem = playingItem;
             this._skills = skills;
@@ -57,58 +72,28 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    const addNewRow = (obj) => {
-        let table = document.getElementsByTagName('table')[0];
-        let newRow = table.insertRow(table.rows.length);
-
-        let cel1 = newRow.insertCell(0);
-        let cel2 = newRow.insertCell(1);
-        let cel3 = newRow.insertCell(2);
-        let cel4 = newRow.insertCell(3);
-        let cel5 = newRow.insertCell(4);
-        let cel6 = newRow.insertCell(5);
-        let cel7 = newRow.insertCell(6);
-        let cel8 = newRow.insertCell(7);
-        let cel9 = newRow.insertCell(8);
-        let cel10 = newRow.insertCell(9);
-
-        cel1.innerHTML = obj.sportClass;
-        cel2.innerHTML = obj.sportName;
-        cel3.innerHTML = obj.activity;
-        cel4.innerHTML = obj.arena;
-        cel5.innerHTML = obj.rules;
-        cel6.innerHTML = obj.playTime;
-        cel7.innerHTML = obj.team;
-        cel8.innerHTML = obj.playingItem;
-        cel9.innerHTML = obj._skills;
-        cel10.innerHTML = `<img src="delete.svg" class="delete" id="${table.rows.length - 1}" alt="basket">`;
-        
-        deleteRow();
-        localStorage.setItem('sports', JSON.stringify(sportsArray));
-    }
-
     const makeNewSport = () => {
+        
         let sportClass;
         let sportName = document.getElementById("sport-name").value;
         let activity = document.getElementById("activity").value;
         let arena = document.getElementById("arena").value;
         let rules = document.getElementById("rules").value;
-        let playingTime = document.getElementById("playing-time").value;
-        let skills = document.getElementById("skills").value;
+        let playTime = document.getElementById("playing-time").value;
+        let skills; //= document.getElementById("skills").value;
         let team = document.getElementById("team").value;
         let playingItem = document.getElementById("playing-item").value;
+        let id = sportsArray.length;
         let sport;
 
-        sportsArray.value = JSON.parse(localStorage.getItem("sports"));
 
         if (select.value === 'Football') {
             sportClass = 'Football';
-            sport = new Football(sportName, activity, arena, rules, playingTime, team, playingItem, skills, sportClass);
+            sport = new Football(sportName, activity, arena, rules, playTime, id, team, playingItem, skills, sportClass);
         } else if (select.value === 'Hockey'){
             sportClass = 'Hockey';
-            sport = new Hockey(sportName, activity, arena, rules, playingTime, team, playingItem, skills, sportClass);
+            sport = new Hockey(sportName, activity, arena, rules, playTime, id, team, playingItem, skills, sportClass);
         }
-
 
         let sportNamePatt = /^[A-Za-z- ]+$/g;
         let activityPatt = /^[A-Za-z -]+$/g;
@@ -149,25 +134,14 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("rules_alert").style.color = "red";
         }
 
-        if (playingTime.length == 0) {
+        if (playTime.length == 0) {
             document.getElementById("playing-time_alert").innerHTML = "Rules Should Not be Blank";
             document.getElementById("playing-time_alert").style.color = "red";
         }
 
         sportsArray.push(sport);
-        addNewRow(sport);
-    }
-
-    const deleteRow = () => {
-         
-        deleteBtns = document.querySelectorAll('.delete');
-        deleteBtns.forEach((btn) => {
-            btn.addEventListener('click', (e) => {
-                e.target.closest('tr').remove();
-                sportsArray.splice((+e.target.id - 1), 1)
-                localStorage.setItem('sports', JSON.stringify(sportsArray));
-            })
-        })
+        localStorage.setItem('sports', JSON.stringify(sportsArray));
+        render();
     }
 
     const clearInputs = () => {
@@ -179,20 +153,54 @@ document.addEventListener("DOMContentLoaded", () => {
         area.value = '';
     }
 
-    submitBtn.addEventListener('click', (e) => {
-        e.preventDefault();
+    const render = () => { 
+        const tbody = document.getElementById('table-body');
+        const arr = JSON.parse(localStorage.getItem("sports"));
+        
+        tbody.innerHTML = '';
+        sportsArray = [];
+        
+        if (arr !== null) {
+            arr.forEach((sport) => {
+                if (sport.sportClass === 'Football') {
+                    sport = new Football(sport.sportName, sport.activity, sport.arena, sport.rules, sport.playTime, sport.id, sport.team, sport.playingItem, sport.skills, sport.sportClass);
+                } else if (sport.sportClass === 'Hockey'){
+                    sport = new Hockey(sport.sportName, sport.activity, sport.arena, sport.rules, sport.playTime, sport.id, sport.team, sport.playingItem, sport.skills, sport.sportClass);
+                }
+                sportsArray.push(sport);
+                return sportsArray;
+            });
+            
+            sportsArray.forEach(item => {
+                tbody.insertAdjacentHTML('beforeend', `
+                    <tr data-key="${item.id}">
+                        <th scope="row">${item.id}</th>
+                        <td>${item.sportClass}</td>
+                        <td>${item.sportName}</td>
+                        <td>${item.activity}</td>
+                        <td>${item.arena}</td>
+                        <td>${item.rules}</td>
+                        <td>${item.playTime}</td>
+                        <td>${item.team}</td>
+                        <td>${item.playingItem}</td>
+                        <td>${`<img src="delete.svg" class="delete" alt="basket">`}</td>
+                    </tr>
+                `);
+            });
+        } 
+       
+        localStorage.setItem('sports', JSON.stringify(sportsArray));
+        
+    };
+
+    submitBtn.addEventListener('click', () => {
         makeNewSport();
         clearInputs();
     });
-
-    const render = function () { 
-        const rows = document.querySelectorAll('tr');
-        
-        sportsArray.forEach(item => {
-            addNewRow(item);
-        });
-    };
-
+    
     render();
-    deleteRow();
+
+    if (sportsArray.length !== 0) {
+        sportsArray[0].delete();
+    }
 })

@@ -104,48 +104,33 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col form-group">
-                    <div class="row">
-                        <label class="col-md-3">Skills</label>
-                        <div class="col-md-9">
-                            <select name="skills" id="skills" class="select form-control" placeholder="Enter Players' Skills">
-                            <datalist id="skill">
-                                <option value="Speed" class="form-check-input">Speed</option>
-                                <option value="Agility" class="form-check-input">Agility</option>
-                                <option value="Body Control" class="form-check-input">Body Control</option>
-                                <option value="Jumping" class="form-check-input">Jumping</option>
-                                <option value="Concentration" class="form-check-input">Concentration</option>
-                                <option value="Catching" class="form-check-input">Catching</option>
-                                <option value="Elusiveness" class="form-check-input">Elusiveness</option>
-                            </datalist>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <button type="submit" class="btn btn-default mx-auto d-block">Save Sport</button>
         </div>
 
         <div class="container table-container">
             <h1 class="text-center">Table of Sports</h1>
             
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th class="text-center">Sport Type</th>
-                        <th class="text-center">Sports Name</th>
-                        <th class="text-center">Activity Type</th>
-                        <th class="text-center">Arena</th>
-                        <th class="text-center">Rules</th>
-                        <th class="text-center">Playing Time</th>
-                        <th class="text-center">Team Format</th>
-                        <th class="text-center">Playing Item</th>
-                        <th class="text-center">Skills</th>
-                        <th class="text-center">Delete</th>
-                    </tr>
-                </thead>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="text-center" scope="col">#</th>
+                            <th class="text-center" scope="col">Sport Type</th>
+                            <th class="text-center" scope="col">Sports Name</th>
+                            <th class="text-center" scope="col">Activity Type</th>
+                            <th class="text-center" scope="col">Arena</th>
+                            <th class="text-center" scope="col">Rules</th>
+                            <th class="text-center" scope="col">Playing Time</th>
+                            <th class="text-center" scope="col">Team Format</th>
+                            <th class="text-center" scope="col">Playing Item</th>
+                            <th class="text-center" scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                       
+                    </tbody>
+                </table>
+            </div>
 
         </div>
 
