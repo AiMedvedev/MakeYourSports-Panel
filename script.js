@@ -225,7 +225,7 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
     removeSkillBtn.addEventListener('click', () => {
-        //console.log('click');
+        
         if (selectSportArray.selectedIndex === 0) {
             return;
         }
