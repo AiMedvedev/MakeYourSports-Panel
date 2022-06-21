@@ -94,3 +94,11 @@ body
 		.table-container .text-center {
 			margin-top: 60px;
 		}
+
+		.skills {
+			margin-top: 60px;
+		}
+
+		.skills select {
+			margin-top: 10px;
+		}

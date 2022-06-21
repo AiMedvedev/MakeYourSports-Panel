@@ -2,10 +2,13 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     const submitBtn = document.querySelector('.form-container .btn-default')
-    const skillsBtn = document.getElementById('skills');
+    
+    const skillsDiv = document.querySelector('.skills');
     const skillsInput = document.querySelector('.skills input');
-    let sportsArray = JSON.parse(localStorage.getItem("sports")) || [];
+    const selectSportArray = document.getElementById('sport');
+    const skillsBtn = document.getElementById('skills');
 
+    let sportsArray = JSON.parse(localStorage.getItem("sports")) || [];
     class TeamSports {
         constructor(sportName, activity, arena, rules, playTime, id) {
             this.sportName = sportName;
@@ -202,23 +205,22 @@ document.addEventListener("DOMContentLoaded", () => {
         sportsArray[0].delete();
     }
 
-    const skillsDiv = document.querySelector('.skills');
-    const selectSportArray = document.createElement('select');
-    selectSportArray.classList.add('select');
-    
-    skillsDiv.appendChild(selectSportArray);
-    
+
     sportsArray.forEach((array, index) => {
         const selectOption = document.createElement('option');
+        selectOption.classList.add('form-control');
         selectSportArray.append(selectOption);
         selectOption.textContent = array.sportName;
         selectOption.setAttribute('id', index);
     })
 
     skillsBtn.addEventListener('click', () => {
-        
-        sportsArray[selectSportArray.selectedIndex].skills.push(skillsInput.value);
+        if (selectSportArray.selectedIndex === 0) {
+            return;
+        }
+
+        sportsArray[selectSportArray.selectedIndex - 1].skills.push(skillsInput.value);
         localStorage.setItem('sports', JSON.stringify(sportsArray));
-        //console.log(sportsArray);
+        skillsInput.value = '';
     })
 })
