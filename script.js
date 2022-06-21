@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const submitBtn = document.querySelector('.form-container .btn-default')
     
     const skillsDiv = document.querySelector('.skills');
-    const skillsInput = document.querySelector('.skills input');
+    const skillsInput = skillsDiv.querySelector('input');
     const selectSportArray = document.getElementById('sport');
     const skillsBtn = document.getElementById('skills');
 
@@ -18,6 +18,19 @@ document.addEventListener("DOMContentLoaded", () => {
             this.playTime = playTime;
             this.id = id;
         }
+
+        configurable = true;
+
+
+        get skills() {
+            return this._skills;
+        }
+
+        set skills(str) {
+            this.skills.push(str);
+            return this.skills;
+        }
+
         gamePlay() {
             console.log('This is so fun!');
         }
@@ -38,6 +51,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
         }
+
+
     }
 
     class Hockey extends TeamSports {
@@ -48,14 +63,6 @@ document.addEventListener("DOMContentLoaded", () => {
             this._skills = skills;
             this.sportClass = sportClass;
         }
-
-        get skills() {
-            return this._skills;
-        }
-
-        set skills(str) {
-            this.skills.push(str);
-        }
     }
 
     class Football extends TeamSports {
@@ -65,14 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
             this.playingItem = playingItem;
             this._skills = skills;
             this.sportClass = sportClass;
-        }
-
-        get skills() {
-            return this._skills;
-        }
-
-        set skills(str) {
-            this._skills.push(str);
         }
     }
 
@@ -185,6 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <td>${item.playTime}</td>
                         <td>${item.team}</td>
                         <td>${item.playingItem}</td>
+                        <td>${item._skills}</td>
                         <td>${`<img src="delete.svg" class="delete" alt="basket">`}</td>
                     </tr>
                 `);
@@ -198,13 +198,6 @@ document.addEventListener("DOMContentLoaded", () => {
     submitBtn.addEventListener('click', () => {
         makeNewSport();
     });
-    
-    render();
-
-    if (sportsArray.length !== 0) {
-        sportsArray[0].delete();
-    }
-
 
     sportsArray.forEach((array, index) => {
         const selectOption = document.createElement('option');
@@ -219,8 +212,15 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        sportsArray[selectSportArray.selectedIndex - 1].skills.push(skillsInput.value);
+        sportsArray[selectSportArray.selectedIndex - 1].skills = skillsInput.value;
         localStorage.setItem('sports', JSON.stringify(sportsArray));
         skillsInput.value = '';
     })
+
+    render();
+
+    if (sportsArray.length !== 0) {
+        sportsArray[0].delete();
+    }
+
 })
