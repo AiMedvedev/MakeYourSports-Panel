@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     const skillsDiv = document.querySelector('.skills');
     const skillsInput = skillsDiv.querySelector('input');
+    const removeSkillBtn = document.getElementById('remove-skills');
     const selectSportArray = document.getElementById('sport');
     const skillsBtn = document.getElementById('skills');
 
@@ -28,6 +29,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         set skills(str) {
             this.skills.push(str);
+            return this.skills;
+        }
+
+        removeSkill() {
+            this.skills.pop();
             return this.skills;
         }
 
@@ -214,6 +220,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
         sportsArray[selectSportArray.selectedIndex - 1].skills = skillsInput.value;
         localStorage.setItem('sports', JSON.stringify(sportsArray));
+        render();
+        skillsInput.value = '';
+    })
+
+    removeSkillBtn.addEventListener('click', () => {
+        //console.log('click');
+        if (selectSportArray.selectedIndex === 0) {
+            return;
+        }
+
+        sportsArray[selectSportArray.selectedIndex - 1].removeSkill();
+        localStorage.setItem('sports', JSON.stringify(sportsArray));
+        render();
         skillsInput.value = '';
     })
 
@@ -222,5 +241,4 @@ document.addEventListener("DOMContentLoaded", () => {
     if (sportsArray.length !== 0) {
         sportsArray[0].delete();
     }
-
 })

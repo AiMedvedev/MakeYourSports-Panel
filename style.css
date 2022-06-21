@@ -1,3 +1,9 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
 body
 		{
 			background-color:#AEE19E;
@@ -56,20 +62,26 @@ body
 
 		button
 		{
-			margin-top:30px;
+			margin-top: 20px;
+			
 		}
 
 		.btn
 		{
 			background-color: orange;
-			color:white;
+			color:rgb(36, 20, 182);
+			font-weight: bold;
+			height: 25px;
+			width: 150px;
+			border-radius: 6px;
+			cursor: pointer;
 		}
 
 		table th,td
 		{
 			color:white;
 			text-align:center;
-			border: solid 1px purple;
+			border: solid 1px rgb(226, 240, 36);
 		}
 
 		th,td {
@@ -97,8 +109,13 @@ body
 
 		.skills {
 			margin-top: 60px;
+			font-weight: bold;
 		}
 
 		.skills select {
 			margin-top: 10px;
+		}
+
+		#remove-skills {
+			color:rgb(182, 20, 20);
 		}
